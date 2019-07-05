@@ -117,9 +117,11 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvLikeCount.setText(String.format("%s", tweet.favoriteCount));
         etReply.setText("@" + tweet.user.screenName);
 
-        Glide.with(this)
-                .load(tweet.mediaUrl)
-                .into(ivMedia);
+        if (tweet.mediaUrl != null) {
+            Glide.with(this)
+                    .load(tweet.mediaUrl)
+                    .into(ivMedia);
+        }
 
         ibRetweet.setOnClickListener(new View.OnClickListener() {
             @Override

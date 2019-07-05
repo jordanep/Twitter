@@ -38,9 +38,11 @@ public class Tweet {
         tweet.favoriteCount = jsonObject.getInt("favorite_count");
 
         JSONObject entities = jsonObject.getJSONObject("entities");
-        JSONArray media = entities.getJSONArray("media");
-        if (media != null) {
+        if (entities.has("media")) {
+            JSONArray media = entities.getJSONArray("media");
             tweet.mediaUrl = media.getString(6);
+        } else {
+            tweet.mediaUrl = null;
         }
 
         return tweet;
