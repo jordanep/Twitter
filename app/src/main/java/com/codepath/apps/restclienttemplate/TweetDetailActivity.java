@@ -1,6 +1,7 @@
 package com.codepath.apps.restclienttemplate;
 
 import android.content.Intent;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -234,11 +235,11 @@ public class TweetDetailActivity extends AppCompatActivity {
 
     private String getDetailTime(String rawTimeString) {
         String detailTime;
-        int hourDiff = 7; // TODO: hardcoded and shouldn't be (I think this is the difference from GMT)
+        int hourDiff = -7; // TODO: hardcoded and shouldn't be (this is the difference from UTC)
 
         String[] timePieces = rawTimeString.split(" ");
         String[] timeNums = timePieces[3].split(":");
-        int hour = Integer.parseInt(timeNums[0]) - hourDiff;
+        int hour = Integer.parseInt(timeNums[0]) + hourDiff;
         if (hour > 12) {
             detailTime = (hour - 12) + ":" + timeNums[1] + " PM";
         }
