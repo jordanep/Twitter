@@ -234,13 +234,16 @@ public class TweetDetailActivity extends AppCompatActivity {
 
     private String getDetailTime(String rawTimeString) {
         String detailTime;
-        int hourDiff = 7; // TODO: hardcoded and shouldn't be
+        int hourDiff = 7; // TODO: hardcoded and shouldn't be (I think this is the difference from GMT)
 
         String[] timePieces = rawTimeString.split(" ");
         String[] timeNums = timePieces[3].split(":");
         int hour = Integer.parseInt(timeNums[0]) - hourDiff;
         if (hour > 12) {
             detailTime = (hour - 12) + ":" + timeNums[1] + " PM";
+        }
+        else if (hour < 0) {
+            detailTime = (hour + 12) + ":" + timeNums[1] + " PM";
         }
         else {
             detailTime = hour + ":" + timeNums[1] + " AM";
