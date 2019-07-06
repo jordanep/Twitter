@@ -139,17 +139,6 @@ public class TimelineActivity extends AppCompatActivity {
         fetchTimelineAsync(0);
     }
 
-    /*@Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == R.id.miCompose) {
-            composeTweet();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }*/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // inflate the menu; this adds items to the action bar if it is present

@@ -44,7 +44,7 @@ public class TweetDetailActivity extends AppCompatActivity {
     private EditText etReply;
     private Button bReply;
     private TextView tvCharCount;
-    private ImageView ivMedia;
+    //private ImageView ivMedia;
 
     private Tweet tweet;
     private TwitterClient client;
@@ -86,7 +86,7 @@ public class TweetDetailActivity extends AppCompatActivity {
         etReply = findViewById(R.id.etReply);
         bReply = findViewById(R.id.bReply);
         tvCharCount = findViewById(R.id.tvCharCount);
-        ivMedia = findViewById(R.id.ivMedia);
+        //ivMedia = findViewById(R.id.ivMedia);
 
         tweet = Parcels.unwrap(getIntent().getParcelableExtra(Tweet.class.getSimpleName()));
 
@@ -118,11 +118,18 @@ public class TweetDetailActivity extends AppCompatActivity {
         tvLikeCount.setText(String.format("%s", tweet.favoriteCount));
         etReply.setText("@" + tweet.user.screenName);
 
-        if (tweet.mediaUrl != null) {
+        etReply.addTextChangedListener(textWatcher);
+
+        // TODO: media embedding not working as expected
+        /*if (tweet.mediaUrl != null) {
+            ivMedia.setVisibility(View.VISIBLE);
             Glide.with(this)
                     .load(tweet.mediaUrl)
                     .into(ivMedia);
-        }
+            String[] bodyParts = tweet.body.split("https");
+            tweet.body = bodyParts[0];
+            tvBody.setText(tweet.body);
+        }*/
 
         ibRetweet.setOnClickListener(new View.OnClickListener() {
             @Override

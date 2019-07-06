@@ -82,6 +82,17 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
                 .apply(RequestOptions.circleCropTransform())
                 .into(viewHolder.ivProfileImage);
 
+        // TODO: media embedding not working as expected
+        /*if (tweet.mediaUrl != null) {
+            viewHolder.ivMedia.setVisibility(View.VISIBLE);
+            Glide.with(context)
+                    .load(tweet.mediaUrl)
+                    .into(viewHolder.ivMedia);
+            String[] bodyParts = tweet.body.split("https");
+            tweet.body = bodyParts[0];
+            viewHolder.tvBody.setText(tweet.body);
+        }*/
+
         viewHolder.ibRetweet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -222,6 +233,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
         public ImageButton ibLike;
         public TextView tvRetweetCount;
         public TextView tvFavoriteCount;
+        //public ImageView ivMedia;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -236,6 +248,7 @@ public class TweetAdapter extends RecyclerView.Adapter<TweetAdapter.ViewHolder> 
             ibLike = itemView.findViewById(R.id.ibLike);
             tvRetweetCount = itemView.findViewById(R.id.tvRetweetCount);
             tvFavoriteCount = itemView.findViewById(R.id.tvFavoriteCount);
+            //ivMedia = itemView.findViewById(R.id.ivMedia);
 
             itemView.setOnClickListener(this);
         }

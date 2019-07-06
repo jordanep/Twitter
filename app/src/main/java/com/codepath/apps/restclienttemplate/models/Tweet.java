@@ -17,7 +17,7 @@ public class Tweet {
     public boolean favorited;
     public int retweetCount;
     public int favoriteCount;
-    public String mediaUrl;
+    public String mediaUrl = null;
 
     public Tweet() {
 
@@ -40,7 +40,8 @@ public class Tweet {
         JSONObject entities = jsonObject.getJSONObject("entities");
         if (entities.has("media")) {
             JSONArray media = entities.getJSONArray("media");
-            tweet.mediaUrl = media.getString(6);
+            JSONObject mediaVals = media.getJSONObject(0);
+            tweet.mediaUrl = mediaVals.getString("media_url_https");
         } else {
             tweet.mediaUrl = null;
         }
