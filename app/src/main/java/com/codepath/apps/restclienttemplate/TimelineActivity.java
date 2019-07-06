@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
@@ -39,6 +40,8 @@ public class TimelineActivity extends AppCompatActivity {
     private SwipeRefreshLayout swipeContainer;
     private MenuItem miActionProgressItem;
     private FloatingActionButton fabCompose;
+    // TODO: should be in infinite_pagination branch
+    //private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,11 +81,32 @@ public class TimelineActivity extends AppCompatActivity {
         //construct the adapter from this data source
         tweetAdapter = new TweetAdapter(tweets);
         // RecyclerView setup (layout manager, user adapter)
-        rvTweets.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        // TODO: should be in infinite_pagination branch
+        /*scrollListener = new EndlessRecyclerViewScrollListener(linearLayoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                loadNextDataFromApi(page);
+            }
+        };*/
+        rvTweets.setLayoutManager(linearLayoutManager);
         // set the adapter
         rvTweets.setAdapter(tweetAdapter);
+        // TODO: should be in infinite_pagination branch
+        //rvTweets.addOnScrollListener(scrollListener);
         populateTimeline();
     }
+
+    // TODO: should be in infinite_pagination branch
+    /*// Append the next page of data into the adapter
+    // This method probably sends out a network request and appends new data items to your adapter.
+    public void loadNextDataFromApi(int offset) {
+        // Send an API request to retrieve appropriate paginated data
+        //  --> Send the request including an offset value (i.e `page`) as a query parameter.
+        //  --> Deserialize and construct new model objects from the API response
+        //  --> Append the new data objects to the existing set of items inside the array of items
+        //  --> Notify the adapter of the new items made with `notifyItemRangeInserted()`
+    }*/
 
     public void composeTweet() {
         Intent intent = new Intent(this, ComposeActivity.class);
